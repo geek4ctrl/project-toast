@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import Button from '../Button';
 
 import styles from './ToastPlayground.module.css';
-import Toast from '../Toast/Toast';
 import ToastShelf from '../ToastShelf/ToastShelf';
 
 const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
@@ -19,7 +18,7 @@ function ToastPlayground() {
     setIsToastVisible(true);
 
     const newItem = {
-      id: crypto.randomUUID,
+      id: crypto.randomUUID(),
       message: message,
       variant: variant
     }
@@ -41,7 +40,7 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      { isToastVisible ? <ToastShelf toasts={toasts} handleDismiss={setIsToastVisible}/> : <></> }
+      { isToastVisible ? <ToastShelf toasts={toasts} setToasts={setToasts} handleDismiss={setIsToastVisible} /> : <></> }
 
 
       <div className={styles.controlsWrapper}>
