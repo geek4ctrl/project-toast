@@ -46,8 +46,4 @@ function ToastProvider({ children }) {
   )
 }
 
-function useEscapeKey(callback) {
-  
-}
-
 export default ToastProvider;
