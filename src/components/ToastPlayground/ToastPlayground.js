@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-
 import Button from '../Button';
-
 import styles from './ToastPlayground.module.css';
 import ToastShelf from '../ToastShelf/ToastShelf';
+import {ToastContext} from '../ToastProvider';
 
 const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 
@@ -12,7 +11,8 @@ function ToastPlayground() {
   const [message, setMessage] = React.useState('');
   const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
   const [isToastVisible, setIsToastVisible] = React.useState(false);
-  const [toasts, setToasts] = React.useState([]);
+
+  const { toasts, setToasts } = React.useContext(ToastContext)
 
   function handleToasts(event) {
     event.preventDefault();
@@ -28,12 +28,6 @@ function ToastPlayground() {
     const nextItems = [...toasts, newItem];
     setToasts(nextItems);
   }
-
-  React.useEffect(() => {
-
-    console.log('Show me the toasts: ', toasts);
-
-  }, [toasts])
 
   return (
     <form onSubmit={handleToasts}>
