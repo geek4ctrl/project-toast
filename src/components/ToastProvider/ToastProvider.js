@@ -6,6 +6,20 @@ function ToastProvider({ children }) {
 
   const [toasts, setToasts] = React.useState([]);
 
+  React.useEffect(() => {
+    function handleKeyDown(event) {
+      if (event.code === 'Escape') {
+        setToasts([]);
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    }
+  }, [])
+
   function createToast(message, variant) {
     const newItem = {
       id: crypto.randomUUID(),
@@ -30,6 +44,10 @@ function ToastProvider({ children }) {
       {children}
     </ToastContext.Provider>
   )
+}
+
+function useEscapeKey(callback) {
+  
 }
 
 export default ToastProvider;
