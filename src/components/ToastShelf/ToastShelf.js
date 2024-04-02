@@ -3,16 +3,23 @@ import React from 'react';
 import Toast from '../Toast';
 import styles from './ToastShelf.module.css';
 
-function ToastShelf() {
+function ToastShelf({toasts, handleDismiss}) {
+
   return (
-    <ol className={styles.wrapper}>
-      <li className={styles.toastWrapper}>
-        <Toast variant="notice">Example notice toast</Toast>
-      </li>
-      <li className={styles.toastWrapper}>
-        <Toast variant="error">Example error toast</Toast>
-      </li>
-    </ol>
+  <ol className={styles.wrapper}>
+    {
+      toasts.map((toast, key) => {
+        return (
+          <li className={styles.toastWrapper}>        
+            <Toast id={key} variant={toast.variant} handleDismiss={handleDismiss}>
+              {toast.message}
+            </Toast>
+          </li>
+        )
+      })
+    }
+  </ol>
+
   );
 }
 
