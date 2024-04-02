@@ -12,21 +12,12 @@ function ToastPlayground() {
   const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
   const [isToastVisible, setIsToastVisible] = React.useState(false);
 
-  const { toasts, setToasts } = React.useContext(ToastContext)
+  const { createToast } = React.useContext(ToastContext);
 
   function handleToasts(event) {
     event.preventDefault();
-
     setIsToastVisible(true);
-
-    const newItem = {
-      id: crypto.randomUUID(),
-      message: message,
-      variant: variant
-    }
-
-    const nextItems = [...toasts, newItem];
-    setToasts(nextItems);
+    createToast(message, variant)
   }
 
   return (
@@ -37,8 +28,7 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      { isToastVisible ? <ToastShelf toasts={toasts} setToasts={setToasts} handleDismiss={setIsToastVisible} /> : <></> }
-
+      { isToastVisible ? <ToastShelf /> : <></> }
 
       <div className={styles.controlsWrapper}>
         <div className={styles.row}>

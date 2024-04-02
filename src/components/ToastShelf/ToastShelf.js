@@ -3,14 +3,15 @@ import React from 'react';
 import Toast from '../Toast';
 import styles from './ToastShelf.module.css';
 
-function ToastShelf({toasts, setToasts, handleDismiss}) {
+import { ToastContext } from '../ToastProvider';
+
+
+function ToastShelf() {
+
+  const { toasts, setToasts, dismissToast } = React.useContext(ToastContext);
 
   const handleToastDismissal = (id) => {
-    const nextToasts = toasts.filter((toast) => {
-      return toast.id !== id;
-    });
-
-    setToasts(nextToasts);
+    dismissToast(id)
   }
 
   return (
@@ -19,7 +20,7 @@ function ToastShelf({toasts, setToasts, handleDismiss}) {
       toasts.map((toast, key) => {
         return (
           <li className={styles.toastWrapper}>        
-            <Toast key={toast.id} variant={toast.variant} toasts={toasts} setToasts={setToasts} onHandleDismiss={() => {handleToastDismissal(toast.id)}}>
+            <Toast key={toast.id} variant={toast.variant} toasts={toasts} setToasts={setToasts}  onHandleDismiss={() => {handleToastDismissal(toast.id)}}>
               {toast.message}
             </Toast>
           </li>
