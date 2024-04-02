@@ -14,7 +14,9 @@ function ToastPlayground() {
   const [isToastVisible, setIsToastVisible] = React.useState(false);
   const [toasts, setToasts] = React.useState([]);
 
-  function handleToasts() {
+  function handleToasts(event) {
+    event.preventDefault();
+
     setIsToastVisible(true);
 
     const newItem = {
@@ -34,7 +36,8 @@ function ToastPlayground() {
   }, [toasts])
 
   return (
-    <div className={styles.wrapper}>
+    <form onSubmit={handleToasts}>
+          <div className={styles.wrapper}>
       <header>
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
@@ -87,11 +90,12 @@ function ToastPlayground() {
           <div
             className={`${styles.inputWrapper} ${styles.radioWrapper}`}
           >
-            <Button onClick={handleToasts}>Pop Toast!</Button>
+            <Button>Pop Toast!</Button>
           </div>
         </div>
       </div>
     </div>
+    </form>
   );
 }
 
